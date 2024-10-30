@@ -36,11 +36,15 @@ data personas [number_persons];
  }
 
  fstream codigo_binario("persona.dat", ios::out | ios::binary); 
- 
+ if(codigo_binario.is_open())
+ { 
+    codigo_binario.write(reinterpret_cast<char*>(personas),number_persons*sizeof(data));
+    codigo_binario.close();
+    cout<< "datos guardados en el arc: personas.dat \n";
+ } else{
+    cout << "no se pudo abri el arc";
 
-
-
-
-
-
+delete[]personas;
+return 0;
+ }
 }
